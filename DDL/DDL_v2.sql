@@ -40,3 +40,21 @@ CREATE TABLE IF NOT EXISTS dimensional_model.location
 , market VARCHAR(12)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS dimensional_model.time
+(
+, time_id BIGSERIAL PRIMARY KEY
+, minute DOUBLE PRECISION
+, hour_id DOUBLE PRECISION
+, hour DOUBLE PRECISION
+, week_day_id DOUBLE PRECISION
+, week_day DOUBLE PRECISION
+, month_day_id DOUBLE PRECISION
+, month_day DOUBLE PRECISION
+, month_id DOUBLE PRECISION
+, month DOUBLE PRECISION
+, quarter_id DOUBLE PRECISION
+, quarter DOUBLE PRECISION
+, year DOUBLE PRECISION
+)
+;
