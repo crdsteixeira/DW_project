@@ -24,3 +24,17 @@ CREATE TABLE IF NOT EXISTS dimensional_model.product
 , department_name VARCHAR(20)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS dimensional_model.location
+(
+  city_id DOUBLE PRECISION
+, city VARCHAR(35)
+, state_id DOUBLE PRECISION
+, state VARCHAR(36)
+, country_id DOUBLE PRECISION
+, country VARCHAR(25)
+, region_id DOUBLE PRECISION
+, region VARCHAR(20)
+, market_id DOUBLE PRECISION
+, market VARCHAR(12)
+)
