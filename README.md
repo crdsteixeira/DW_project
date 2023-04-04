@@ -1,6 +1,6 @@
 # Data Warehouses Project
 
-## ETL
+## Run ETL Instructions
 
 1. Create schema in postgre
 2. Open transformations for dimensions tables (Customer, Date, Location, Product)
