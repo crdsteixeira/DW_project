@@ -679,13 +679,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values</from>
-      <to>Table output</to>
+      <from>Execute SQL script</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Execute SQL script</from>
-      <to>Select values</to>
+      <from>Select values</from>
+      <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -2517,7 +2517,8 @@
     <quoteString>N</quoteString>
     <sql>CREATE TABLE IF NOT EXISTS dimensional_model.location
 (
-  city_id DOUBLE PRECISION
+  location_id BIGSERIAL PRIMARY KEY
+, city_id DOUBLE PRECISION
 , city VARCHAR(35)
 , state_id DOUBLE PRECISION
 , state VARCHAR(36)
@@ -2528,7 +2529,8 @@
 , market_id DOUBLE PRECISION
 , market VARCHAR(12)
 )
-</sql>
+;
+CREATE INDEX idx ON dimensional_model.location(location_id);</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
