@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Insert_Customer_v2</name>
+    <name>Insert_Product_v2</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,16 +427,16 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/03/26 17:37:54.314</created_date>
+    <created_date>2023/04/04 17:18:33.483</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/03/26 17:37:54.314</modified_date>
+    <modified_date>2023/04/04 17:18:33.483</modified_date>
     <key_for_session_key>H4sIAAAAAAAA/wMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>SupplyChainRelational</name>
+    <name>supply_chain_product</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -489,12 +488,12 @@
   </connection>
   <order>
     <hop>
-      <from>DataCo CSV File Input</from>
-      <to>Select values (customer_segment)</to>
+      <from>CSV file input</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values (customer_segment)</from>
+      <from>Select values</from>
       <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
@@ -505,42 +504,27 @@
     </hop>
     <hop>
       <from>Unique rows</from>
-      <to>Add sequence</to>
+      <to>Add constants</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>DataCo CSV File Input</from>
-      <to>Select values (customer)</to>
+      <from>Add constants</from>
+      <to>Table exists</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add sequence</from>
-      <to>Stream lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Add table name col</from>
-      <to>Stream lookup</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Switch / case</from>
-      <to>Execute SQL script</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Stream lookup</from>
-      <to>Table exists 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Table exists 2</from>
+      <from>Table exists</from>
       <to>Switch / case</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Switch / case</from>
       <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Switch / case</from>
+      <to>Execute SQL script</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -553,59 +537,9 @@
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>Select values (customer)</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2</from>
-      <to>Unique rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique rows 2</from>
-      <to>Add table name col</to>
-      <enabled>Y</enabled>
-    </hop>
   </order>
   <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>seg_id</valuename>
-    <use_database>N</use_database>
-    <connection>SupplyChainRelational</connection>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add table name col</name>
+    <name>Add constants</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -623,7 +557,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>customer</nullif>
+        <nullif>product</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -638,16 +572,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
-      <yloc>208</yloc>
+      <xloc>544</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>DataCo CSV File Input</name>
+    <name>CSV file input</name>
     <type>CsvInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -659,10 +593,10 @@
     <rownum_field/>
     <include_filename>N</include_filename>
     <separator>,</separator>
-    <enclosure>""</enclosure>
+    <enclosure>"</enclosure>
     <header>Y</header>
-    <buffer_size>500000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
@@ -775,7 +709,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>20</length>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -808,7 +742,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>11</length>
+        <length>8</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -830,7 +764,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>12</length>
+        <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -863,7 +797,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>5</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -874,7 +808,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>32</length>
+        <length>30</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -907,7 +841,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>18</length>
+        <length>10</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -951,7 +885,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>26</length>
+        <length>20</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1193,7 +1127,7 @@
         <currency>€</currency>
         <decimal>,</decimal>
         <group>.</group>
-        <length>93</length>
+        <length>86</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1262,62 +1196,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>80</xloc>
-      <yloc>48</yloc>
+      <xloc>64</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Execute SQL script</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SupplyChainRelational</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>Y</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE IF NOT EXISTS dimensional_model.customer
-(
-  customer_id BIGINT PRIMARY KEY
-, first_name VARCHAR(11)
-, last_name VARCHAR(12)
-, zipcode NUMERIC(8, 1)
-, latitude NUMERIC(20, 8)
-, longitude NUMERIC(20, 8)
-, segment_id DOUBLE PRECISION
-, segment VARCHAR(11)
-)
-;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1104</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values (customer)</name>
+    <name>Select values</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1329,31 +1214,40 @@
     </partitioning>
     <fields>
       <field>
-        <name>Customer_Id</name>
+        <name>Product_Card_Id</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Fname</name>
+        <name>Product_Name</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Lname</name>
+        <name>Product_Image</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Country</name>
+        <name>Product_Price</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_City</name>
+        <name>Product_Status</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Zipcode</name>
+        <name>Category_Id</name>
+        <rename/>
       </field>
       <field>
-        <name>Latitude</name>
+        <name>Category_Name</name>
+        <rename/>
       </field>
       <field>
-        <name>Longitude</name>
+        <name>Department_Id</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Segment</name>
+        <name>Department_Name</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1366,98 +1260,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values (customer_segment)</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Customer_Segment</name>
-        <rename>Segment</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Customer_Id</name>
-      </field>
-      <field>
-        <name>Customer_Fname</name>
-      </field>
-      <field>
-        <name>Customer_Lname</name>
-      </field>
-      <field>
-        <name>Customer_Country</name>
-      </field>
-      <field>
-        <name>Customer_City</name>
-      </field>
-      <field>
-        <name>Customer_Zipcode</name>
-      </field>
-      <field>
-        <name>Latitude</name>
-      </field>
-      <field>
-        <name>Longitude</name>
-      </field>
-      <field>
-        <name>Customer_segment_id</name>
-      </field>
-      <field>
-        <name>Customer_Segment</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1248</xloc>
-      <yloc>208</yloc>
+      <xloc>176</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1478,52 +1282,10 @@
     <free_memory/>
     <compress>N</compress>
     <compress_variable/>
-    <unique_rows>Y</unique_rows>
-    <fields>
-      <field>
-        <name>Segment</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>Customer_Id</name>
+        <name>Product_Card_Id</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1541,13 +1303,13 @@
     </remotesteps>
     <GUI>
       <xloc>288</xloc>
-      <yloc>208</yloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Stream lookup</name>
-    <type>StreamLookup</type>
+    <name>Table exists</name>
+    <type>TableExists</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1556,23 +1318,10 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Add sequence</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>Customer_Segment</name>
-        <field>Segment</field>
-      </key>
-      <value>
-        <name>seg_id</name>
-        <rename>Customer_segment_id</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
+    <connection>supply_chain_product</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result_check_table</resultfieldname>
+    <schemaname>dimensional_model</schemaname>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1582,8 +1331,237 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>208</yloc>
+      <xloc>672</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Unique rows</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>Product_Card_Id</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Product_Card_Id</name>
+        <rename>product_id</rename>
+      </field>
+      <field>
+        <name>Product_Name</name>
+        <rename>name</rename>
+      </field>
+      <field>
+        <name>Product_Image</name>
+        <rename>image</rename>
+      </field>
+      <field>
+        <name>Product_Price</name>
+        <rename>price</rename>
+      </field>
+      <field>
+        <name>Product_Status</name>
+        <rename>status</rename>
+      </field>
+      <field>
+        <name>Category_Id</name>
+        <rename>category_id</rename>
+      </field>
+      <field>
+        <name>Category_Name</name>
+        <rename>category_name</rename>
+      </field>
+      <field>
+        <name>Department_Id</name>
+        <rename>department_id</rename>
+      </field>
+      <field>
+        <name>Department_Name</name>
+        <rename>department_name</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1008</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>supply_chain_product</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE IF NOT EXISTS dimensional_model.product
+(
+  product_id BIGINT PRIMARY KEY
+, name VARCHAR(45)
+, image VARCHAR(150)
+, price BIGINT
+, status BIGINT
+, category_id BIGINT
+, category_name VARCHAR(20)
+, department_id BIGINT
+, department_name VARCHAR(20)
+)
+;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table output</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>supply_chain_product</connection>
+    <schema>dimensional_model</schema>
+    <table>product</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>product_id</column_name>
+        <stream_name>product_id</stream_name>
+      </field>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+      <field>
+        <column_name>image</column_name>
+        <stream_name>image</stream_name>
+      </field>
+      <field>
+        <column_name>price</column_name>
+        <stream_name>price</stream_name>
+      </field>
+      <field>
+        <column_name>status</column_name>
+        <stream_name>status</stream_name>
+      </field>
+      <field>
+        <column_name>category_id</column_name>
+        <stream_name>category_id</stream_name>
+      </field>
+      <field>
+        <column_name>category_name</column_name>
+        <stream_name>category_name</stream_name>
+      </field>
+      <field>
+        <column_name>department_id</column_name>
+        <stream_name>department_id</stream_name>
+      </field>
+      <field>
+        <column_name>department_name</column_name>
+        <stream_name>department_name</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1168</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1620,199 +1598,12 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table exists 2</name>
-    <type>TableExists</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SupplyChainRelational</connection>
-    <tablenamefield>table</tablenamefield>
-    <resultfieldname>result_check_table</resultfieldname>
-    <schemaname>dimensional_model</schemaname>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>848</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>SupplyChainRelational</connection>
-    <schema>dimensional_model</schema>
-    <table>customer</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-      <field>
-        <column_name>customer_id</column_name>
-        <stream_name>Customer_Id</stream_name>
-      </field>
-      <field>
-        <column_name>first_name</column_name>
-        <stream_name>Customer_Fname</stream_name>
-      </field>
-      <field>
-        <column_name>last_name</column_name>
-        <stream_name>Customer_Lname</stream_name>
-      </field>
-      <field>
-        <column_name>zipcode</column_name>
-        <stream_name>Customer_Zipcode</stream_name>
-      </field>
-      <field>
-        <column_name>latitude</column_name>
-        <stream_name>Latitude</stream_name>
-      </field>
-      <field>
-        <column_name>longitude</column_name>
-        <stream_name>Longitude</stream_name>
-      </field>
-      <field>
-        <column_name>segment_id</column_name>
-        <stream_name>Customer_segment_id</stream_name>
-      </field>
-      <field>
-        <column_name>segment</column_name>
-        <stream_name>Customer_Segment</stream_name>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1408</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>Y</count_rows>
-    <count_field>Count</count_field>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Segment</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows 2</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Customer_Id</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>208</yloc>
+      <xloc>784</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
-    <error>
-      <source_step>Table output</source_step>
-      <target_step>Execute SQL script</target_step>
-      <is_enabled>N</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
