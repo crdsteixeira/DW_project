@@ -44,14 +44,14 @@ CREATE TABLE IF NOT EXISTS dimensional_model.location
 CREATE TABLE IF NOT EXISTS dimensional_model.time
 (
 , time_id BIGSERIAL PRIMARY KEY
-, minute DOUBLE PRECISION
-, hour_id DOUBLE PRECISION
-, hour DOUBLE PRECISION
-, week_day DOUBLE PRECISION
-, month_day DOUBLE PRECISION
-, month DOUBLE PRECISION
-, quarter DOUBLE PRECISION
-, year DOUBLE PRECISION
+, minute INT
+, hour_id INT
+, hour INT
+, week_day INT
+, month_day INT
+, month INT
+, quarter INT
+, year INT
 )
 ;
 
@@ -66,5 +66,24 @@ CREATE TABLE IF NOT EXISTS dimensional_model.order_items
 , quantity BIGINT
 , sales double precision
 , order_item_total double precision
+)
+;
+
+CREATE TABLE IF NOT EXISTS dimensional_model.order
+(
+  customer_id BIGINT REFERENCES dimensional_model.customer (customer_id) ON DELETE SET NULL ON UPDATE CASCADE
+, order_location_id BIGINT REFERENCES dimensional_model.location (location_id) ON DELETE SET NULL ON UPDATE CASCADE
+, shipping_date BIGINT REFERENCES dimensional_model.time (time_id) ON DELETE SET NULL ON UPDATE CASCADE
+, order_date BIGINT REFERENCES dimensional_model.time (time_id) ON DELETE SET NULL ON UPDATE CASCADE
+, payment_type VARCHAR(8)
+, days_for_shipping_real BIGINT
+, days_for_shipment_scheduled BIGINT
+, delivery_status VARCHAR(17)
+, late_delivery_risk BIGINT
+, profit_per_order DOUBLE PRECISION
+, order_status VARCHAR(15)
+, number_of_items DOUBLE PRECISION
+, total_discount DOUBLE PRECISION
+, total_price DOUBLE PRECISION
 )
 ;

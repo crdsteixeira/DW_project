@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Insert_Date_v2</name>
+    <name>Insert_time</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -848,9 +848,9 @@
     <quoteString>N</quoteString>
     <sql>CREATE TABLE IF NOT EXISTS dimensional_model.time
 (
-, time_id BIGSERIAL PRIMARY KEY
+ time_id BIGSERIAL PRIMARY KEY
 , minute INT
-, hour_id BIGINT
+, hour_id INT
 , hour INT
 , week_day INT
 , month_day INT
@@ -958,7 +958,7 @@
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -969,6 +969,38 @@
     <return_keys>N</return_keys>
     <return_field/>
     <fields>
+      <field>
+        <column_name>minute</column_name>
+        <stream_name>minute</stream_name>
+      </field>
+      <field>
+        <column_name>hour_id</column_name>
+        <stream_name>hour_id</stream_name>
+      </field>
+      <field>
+        <column_name>hour</column_name>
+        <stream_name>hour</stream_name>
+      </field>
+      <field>
+        <column_name>week_day</column_name>
+        <stream_name>week_day</stream_name>
+      </field>
+      <field>
+        <column_name>month_day</column_name>
+        <stream_name>month_day</stream_name>
+      </field>
+      <field>
+        <column_name>month</column_name>
+        <stream_name>month</stream_name>
+      </field>
+      <field>
+        <column_name>quarter</column_name>
+        <stream_name>quarter</stream_name>
+      </field>
+      <field>
+        <column_name>year</column_name>
+        <stream_name>year</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
