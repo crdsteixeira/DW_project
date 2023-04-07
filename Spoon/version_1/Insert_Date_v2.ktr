@@ -489,11 +489,6 @@
   </connection>
   <order>
     <hop>
-      <from>Select hour</from>
-      <to>Sort rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Sort rows</from>
       <to>Unique rows</to>
       <enabled>Y</enabled>
@@ -506,27 +501,27 @@
     <hop>
       <from>Table exists</from>
       <to>Switch / case</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Switch / case</from>
       <to>Execute SQL script</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Switch / case</from>
       <to>Select values 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values 2</from>
       <to>Table output</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Execute SQL script</from>
       <to>Select values 2</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>DataCo CSV File Input</from>
@@ -564,8 +559,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add constants</from>
-      <to>Select hour</to>
+      <from>Add sequence</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select hour</from>
+      <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -574,13 +574,48 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Calculator 2</from>
+      <to>Select hour</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>DataCo CSV File Input</from>
+      <to>Select date columnns 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select date columnns 2</from>
+      <to>Sort rows 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 4 2</from>
+      <to>Unique rows 3 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Unique rows 3 2</from>
+      <to>Calculator 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 2 2</from>
+      <to>Row normaliser 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Row normaliser 2</from>
+      <to>Sort rows 4 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Select values</from>
       <to>Stream lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add sequence</from>
-      <to>Stream lookup</to>
+      <from>Stream lookup</from>
+      <to>Table exists</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -598,7 +633,7 @@
     <fields>
       <field>
         <name>hour</name>
-        <rename>hour_unique</rename>
+        <rename>hour</rename>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -611,8 +646,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>144</yloc>
+      <xloc>992</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -633,10 +668,10 @@
     <free_memory/>
     <compress>N</compress>
     <compress_variable/>
-    <unique_rows>Y</unique_rows>
+    <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>hour_unique</name>
+        <name>hour</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -653,7 +688,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
+      <xloc>1120</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
@@ -675,7 +710,7 @@
     <error_description/>
     <fields>
       <field>
-        <name>hour_unique</name>
+        <name>hour</name>
         <case_insensitive>Y</case_insensitive>
       </field>
     </fields>
@@ -688,8 +723,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>320</yloc>
+      <xloc>1248</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -723,8 +758,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>400</yloc>
+      <xloc>1392</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -740,7 +775,7 @@
       <schema_name/>
     </partitioning>
     <connection>SupplyChainRelational_time</connection>
-    <tablenamefield>table </tablenamefield>
+    <tablenamefield>table</tablenamefield>
     <resultfieldname>result_check_table</resultfieldname>
     <schemaname>dimensional_model</schemaname>
     <attributes/>
@@ -752,8 +787,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>752</xloc>
-      <yloc>496</yloc>
+      <xloc>1568</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -790,8 +825,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
-      <yloc>496</yloc>
+      <xloc>1456</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -813,21 +848,18 @@
     <quoteString>N</quoteString>
     <sql>CREATE TABLE IF NOT EXISTS dimensional_model.time
 (
-, time_id BIGSERIAL PRIMARY KEY
+ time_id BIGSERIAL PRIMARY KEY
 , minute DOUBLE PRECISION
 , hour_id DOUBLE PRECISION
 , hour DOUBLE PRECISION
-, week_day_id DOUBLE PRECISION
 , week_day DOUBLE PRECISION
-, month_day_id DOUBLE PRECISION
 , month_day DOUBLE PRECISION
-, month_id DOUBLE PRECISION
 , month DOUBLE PRECISION
-, quarter_id DOUBLE PRECISION
 , quarter DOUBLE PRECISION
 , year DOUBLE PRECISION
 )
-;</sql>
+;
+</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -844,8 +876,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>560</xloc>
-      <yloc>592</yloc>
+      <xloc>1360</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -862,7 +894,7 @@
     </partitioning>
     <fields>
       <field>
-        <name>minute_id</name>
+        <name>minute</name>
         <rename/>
       </field>
       <field>
@@ -874,23 +906,23 @@
         <rename/>
       </field>
       <field>
-        <name>week_day_id</name>
+        <name>week_day</name>
         <rename/>
       </field>
       <field>
-        <name>month_day_id</name>
+        <name>month_day</name>
         <rename/>
       </field>
       <field>
-        <name>month_id</name>
+        <name>month</name>
         <rename/>
       </field>
       <field>
-        <name>quarter_id</name>
+        <name>quarter</name>
         <rename/>
       </field>
       <field>
-        <name>year_id</name>
+        <name>year</name>
         <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
@@ -904,8 +936,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>496</yloc>
+      <xloc>1280</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -948,8 +980,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>496</yloc>
+      <xloc>1152</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1572,8 +1604,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>32</yloc>
+      <xloc>80</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1608,8 +1640,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>32</yloc>
+      <xloc>304</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1658,8 +1690,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>32</yloc>
+      <xloc>480</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1696,8 +1728,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
-      <yloc>32</yloc>
+      <xloc>688</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1738,8 +1770,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>32</yloc>
+      <xloc>880</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1773,8 +1805,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
-      <yloc>32</yloc>
+      <xloc>1040</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1790,6 +1822,18 @@
       <schema_name/>
     </partitioning>
     <fields>
+      <field>
+        <name>date_origin</name>
+        <rename/>
+      </field>
+      <field>
+        <name>date_time</name>
+        <rename/>
+      </field>
+      <field>
+        <name>counter</name>
+        <rename/>
+      </field>
       <field>
         <name>minute</name>
         <rename/>
@@ -1833,8 +1877,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>496</yloc>
+      <xloc>1568</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1842,7 +1886,7 @@
     <name>Add constants</name>
     <type>Constant</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1872,8 +1916,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1088</xloc>
-      <yloc>32</yloc>
+      <xloc>1408</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2003,8 +2047,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
-      <yloc>32</yloc>
+      <xloc>1232</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -2022,18 +2066,18 @@
     <from>Add sequence</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
+    <sorted_list>Y</sorted_list>
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
         <name>hour</name>
-        <field>hour_unique</field>
+        <field>hour</field>
       </key>
       <value>
         <name>hour_id</name>
-        <rename>time_hour_id</rename>
+        <rename>hour_id</rename>
         <default/>
-        <type>None</type>
+        <type>Integer</type>
       </value>
     </lookup>
     <attributes/>
@@ -2045,8 +2089,248 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>976</xloc>
-      <yloc>496</yloc>
+      <xloc>1568</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Calculator 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>N</failIfNoFile>
+    <calculation>
+      <field_name>hour</field_name>
+      <calc_type>HOUR_OF_DAY</calc_type>
+      <field_a>date_time</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>864</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select date columnns 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>order_date_DateOrders</name>
+      </field>
+      <field>
+        <name>shipping_date_DateOrders</name>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>order_date_DateOrders</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>shipping_date_DateOrders</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>384</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Row normaliser 2</name>
+    <type>Normaliser</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <typefield>date_origin</typefield>
+    <fields>
+      <field>
+        <name>order_date_DateOrders</name>
+        <value>order_date_DateOrders</value>
+        <norm>date_time</norm>
+      </field>
+      <field>
+        <name>shipping_date_DateOrders</name>
+        <value>shipping_date_DateOrders</value>
+        <norm>date_time</norm>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>496</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 4 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>date_time</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Unique rows 3 2</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>Y</count_rows>
+    <count_field>counter</count_field>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>date_time</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -659,11 +659,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Stream lookup 5</from>
-      <to>Table exists</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Table exists</from>
       <to>Switch / case</to>
       <enabled>Y</enabled>
@@ -686,6 +681,21 @@
     <hop>
       <from>Select values</from>
       <to>Table output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup 5</from>
+      <to>Sort rows 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 7</from>
+      <to>Unique rows 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Unique rows 7</from>
+      <to>Table exists</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -2456,7 +2466,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
+      <xloc>1168</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2494,7 +2504,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
+      <xloc>1168</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2529,8 +2539,7 @@
 , market_id DOUBLE PRECISION
 , market VARCHAR(12)
 )
-;
-CREATE INDEX idx ON dimensional_model.location(location_id);</sql>
+;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -2547,7 +2556,7 @@ CREATE INDEX idx ON dimensional_model.location(location_id);</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1216</xloc>
+      <xloc>1344</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2615,7 +2624,7 @@ CREATE INDEX idx ON dimensional_model.location(location_id);</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
+      <xloc>1168</xloc>
       <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2659,8 +2668,133 @@ CREATE INDEX idx ON dimensional_model.location(location_id);</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
+      <xloc>1168</xloc>
       <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 7</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>city_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>state_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>country_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>region_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>market_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Unique rows 7</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <count_rows>Y</count_rows>
+    <count_field>count</count_field>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>city_id</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+      <field>
+        <name>state_id</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+      <field>
+        <name>country_id</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+      <field>
+        <name>region_id</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+      <field>
+        <name>market_id</name>
+        <case_insensitive>Y</case_insensitive>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1072</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
