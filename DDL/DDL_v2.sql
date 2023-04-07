@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS dimensional_model.time
 
 CREATE TABLE IF NOT EXISTS dimensional_model.order_items
 (
-  product_id BIGINT
-, order_time_id BIGINT
+  product_id BIGINT REFERENCES dimensional_model.product (product_id) ON DELETE SET NULL ON UPDATE CASCADE
+, order_time_id BIGINT REFERENCES dimensional_model.time (time_id) ON DELETE SET NULL ON UPDATE CASCADE
 , discount double precision
 , discount_rate double precision
 , product_price double precision
