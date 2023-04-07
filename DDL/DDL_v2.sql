@@ -90,10 +90,10 @@ CREATE TABLE IF NOT EXISTS dimensional_model.order
 
 CREATE TABLE IF NOT EXISTS dimensional_model.agg_sales
 (
-  time_id BIGINT
-, location_id BIGINT
+  time_id BIGINT REFERENCES dimensional_model.time (time_id) ON DELETE SET NULL ON UPDATE CASCADE
+, location_id BIGINT REFERENCES dimensional_model.location (location_id) ON DELETE SET NULL ON UPDATE CASCADE
+, product_id BIGINT REFERENCES dimensional_model.product (product_id) ON DELETE SET NULL ON UPDATE CASCADE
 , segment_id BIGINT
-, product_id BIGINT
 , sales DOUBLE PRECISION
 )
 ;
