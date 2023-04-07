@@ -1145,12 +1145,12 @@
       <field>
         <name>Product_Price</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.######</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -1202,6 +1202,56 @@
     </GUI>
   </step>
   <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>supply_chain_product</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>Y</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE IF NOT EXISTS dimensional_model.product
+(
+  product_id BIGINT PRIMARY KEY
+, name VARCHAR(45)
+, image VARCHAR(150)
+, price double precision
+, status BIGINT
+, category_id BIGINT
+, category_name VARCHAR(20)
+, department_id BIGINT
+, department_name VARCHAR(20)
+)
+;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>896</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
@@ -1215,39 +1265,30 @@
     <fields>
       <field>
         <name>Product_Card_Id</name>
-        <rename/>
       </field>
       <field>
         <name>Product_Name</name>
-        <rename/>
       </field>
       <field>
         <name>Product_Image</name>
-        <rename/>
       </field>
       <field>
         <name>Product_Price</name>
-        <rename/>
       </field>
       <field>
         <name>Product_Status</name>
-        <rename/>
       </field>
       <field>
         <name>Category_Id</name>
-        <rename/>
       </field>
       <field>
         <name>Category_Name</name>
-        <rename/>
       </field>
       <field>
         <name>Department_Id</name>
-        <rename/>
       </field>
       <field>
         <name>Department_Name</name>
-        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1261,112 +1302,6 @@
     </remotesteps>
     <GUI>
       <xloc>176</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>Product_Card_Id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Table exists</name>
-    <type>TableExists</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <connection>supply_chain_product</connection>
-    <tablenamefield>table</tablenamefield>
-    <resultfieldname>result_check_table</resultfieldname>
-    <schemaname>dimensional_model</schemaname>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>672</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Product_Card_Id</name>
-        <case_insensitive>N</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1436,8 +1371,8 @@
     </GUI>
   </step>
   <step>
-    <name>Execute SQL script</name>
-    <type>ExecSQL</type>
+    <name>Sort rows</name>
+    <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1446,31 +1381,23 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>supply_chain_product</connection>
-    <execute_each_row>Y</execute_each_row>
-    <single_statement>Y</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE IF NOT EXISTS dimensional_model.product
-(
-  product_id BIGINT PRIMARY KEY
-, name VARCHAR(45)
-, image VARCHAR(150)
-, price BIGINT
-, status BIGINT
-, category_id BIGINT
-, category_name VARCHAR(20)
-, department_id BIGINT
-, department_name VARCHAR(20)
-)
-;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Product_Card_Id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1480,8 +1407,75 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
-      <yloc>224</yloc>
+      <xloc>288</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Switch / case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fieldname>result_check_table</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>String</case_value_type>
+    <case_value_format/>
+    <case_value_decimal/>
+    <case_value_group/>
+    <default_target_step>Execute SQL script</default_target_step>
+    <cases>
+      <case>
+        <value>Y</value>
+        <target_step>Select values 2</target_step>
+      </case>
+    </cases>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>784</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table exists</name>
+    <type>TableExists</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>supply_chain_product</connection>
+    <tablenamefield>table</tablenamefield>
+    <resultfieldname>result_check_table</resultfieldname>
+    <schemaname>dimensional_model</schemaname>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1566,8 +1560,8 @@
     </GUI>
   </step>
   <step>
-    <name>Switch / case</name>
-    <type>SwitchCase</type>
+    <name>Unique rows</name>
+    <type>Unique</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1576,19 +1570,16 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <fieldname>result_check_table</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>String</case_value_type>
-    <case_value_format/>
-    <case_value_decimal/>
-    <case_value_group/>
-    <default_target_step>Execute SQL script</default_target_step>
-    <cases>
-      <case>
-        <value>Y</value>
-        <target_step>Select values 2</target_step>
-      </case>
-    </cases>
+    <count_rows>N</count_rows>
+    <count_field/>
+    <reject_duplicate_row>N</reject_duplicate_row>
+    <error_description/>
+    <fields>
+      <field>
+        <name>Product_Card_Id</name>
+        <case_insensitive>N</case_insensitive>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1598,7 +1589,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>784</xloc>
+      <xloc>416</xloc>
       <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>

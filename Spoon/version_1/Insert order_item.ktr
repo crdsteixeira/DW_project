@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Insert_Customer_v2</name>
+    <name>Insert order_item</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -428,16 +427,16 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2023/03/26 17:37:54.314</created_date>
+    <created_date>2023/04/07 13:58:34.482</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2023/03/26 17:37:54.314</modified_date>
-    <key_for_session_key>H4sIAAAAAAAA/wMAAAAAAAAAAAA=</key_for_session_key>
+    <modified_date>2023/04/07 13:58:34.482</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>SupplyChainRelational</name>
+    <name>Suply_order_item</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -490,37 +489,42 @@
   <order>
     <hop>
       <from>DataCo CSV File Input</from>
-      <to>Select values (customer_segment)</to>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values (customer_segment)</from>
-      <to>Sort rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows</from>
-      <to>Unique rows</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique rows</from>
-      <to>Add sequence</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>DataCo CSV File Input</from>
-      <to>Select values (customer)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Add sequence</from>
+      <from>Select values</from>
       <to>Stream lookup</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add table name col</from>
+      <from>Table input</from>
       <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup</from>
+      <to>Calculator</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Table input 2</from>
+      <to>Stream lookup 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Calculator</from>
+      <to>Stream lookup 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup 2</from>
+      <to>Select values 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Add constants</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -529,7 +533,12 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Stream lookup</from>
+      <from>Switch / case</from>
+      <to>Select values 2 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
       <to>Table exists 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -539,115 +548,21 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Switch / case</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 2</from>
+      <from>Select values 2 2</from>
       <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Execute SQL script</from>
-      <to>Select values 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values (customer)</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Sort rows 2</from>
-      <to>Unique rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Unique rows 2</from>
-      <to>Add table name col</to>
+      <to>Select values 2 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Add sequence</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>seg_id</valuename>
-    <use_database>N</use_database>
-    <connection>SupplyChainRelational</connection>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>1</start_at>
-    <increment_by>1</increment_by>
-    <max_value>999999999</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add table name col</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>table</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>customer</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>576</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>DataCo CSV File Input</name>
     <type>CsvInput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -914,23 +829,23 @@
       <field>
         <name>Latitude</name>
         <type>Number</type>
-        <format>#.###############</format>
+        <format>#.#</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>15</precision>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>Longitude</name>
         <type>Number</type>
-        <format>#.###############</format>
+        <format>#.#</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>15</precision>
+        <precision>0</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -1013,23 +928,23 @@
       <field>
         <name>Order_Item_Discount</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.#####</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>Order_Item_Discount_Rate</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.#####</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -1046,23 +961,23 @@
       <field>
         <name>Order_Item_Product_Price</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.#####</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>Order_Item_Profit_Ratio</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.#####</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -1079,34 +994,34 @@
       <field>
         <name>Sales</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.#####</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>Order_Item_Total</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.#####</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
         <name>Order_Profit_Per_Order</name>
         <type>Number</type>
-        <format>#.#</format>
+        <format>#.#####</format>
         <currency>€</currency>
         <decimal>.</decimal>
         <group>,</group>
         <length>15</length>
-        <precision>0</precision>
+        <precision>5</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -1263,7 +1178,784 @@
     </remotesteps>
     <GUI>
       <xloc>80</xloc>
-      <yloc>48</yloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Suply_order_item</connection>
+    <sql>SELECT product_id, name, price FROM dimensional_model.product</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>product_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>product_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>name</name>
+        <length>45</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>Product_Name</name>
+        <rename/>
+      </field>
+      <field>
+        <name>order_date_DateOrders</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Order_Item_Discount</name>
+        <rename/>
+        <length>5</length>
+        <precision>5</precision>
+      </field>
+      <field>
+        <name>Order_Item_Discount_Rate</name>
+        <rename/>
+        <length>5</length>
+        <precision>5</precision>
+      </field>
+      <field>
+        <name>Order_Item_Profit_Ratio</name>
+        <rename/>
+        <length>5</length>
+        <precision>5</precision>
+      </field>
+      <field>
+        <name>Order_Item_Quantity</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Sales</name>
+        <rename/>
+      </field>
+      <field>
+        <name>Order_Item_Total</name>
+        <rename/>
+        <length>5</length>
+        <precision>5</precision>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Table input</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>Product_Name</name>
+        <field>name</field>
+      </key>
+      <value>
+        <name>product_id</name>
+        <rename>product_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+      <value>
+        <name>price</name>
+        <rename>price</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input 2</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>Suply_order_item</connection>
+    <sql>SELECT * FROM dimensional_model.time</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>time_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input 2</origin>
+        <comments>time_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>minute</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>minute</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>hour_id</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>hour_id</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>hour</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>hour</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>week_day</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>week_day</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>month_day</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>month_day</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>month</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>month</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>quarter</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>quarter</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Number</type>
+        <storagetype>normal</storagetype>
+        <name>year</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Table input 2</origin>
+        <comments>year</comments>
+        <conversion_Mask>####0.0#########;-####0.0#########</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>pt_PT</date_format_locale>
+        <date_format_timezone>Europe/Lisbon</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>80</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <failIfNoFile>N</failIfNoFile>
+    <calculation>
+      <field_name>minute_q</field_name>
+      <calc_type>MINUTE_OF_HOUR</calc_type>
+      <field_a>order_date_DateOrders</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>hour_q</field_name>
+      <calc_type>HOUR_OF_DAY</calc_type>
+      <field_a>order_date_DateOrders</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>week_day_q</field_name>
+      <calc_type>DAY_OF_WEEK</calc_type>
+      <field_a>order_date_DateOrders</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>month_day_q</field_name>
+      <calc_type>DAY_OF_MONTH</calc_type>
+      <field_a>order_date_DateOrders</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>month_q</field_name>
+      <calc_type>MONTH_OF_DATE</calc_type>
+      <field_a>order_date_DateOrders</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>quarter_q</field_name>
+      <calc_type>QUARTER_OF_DATE</calc_type>
+      <field_a>order_date_DateOrders</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <calculation>
+      <field_name>year_q</field_name>
+      <calc_type>YEAR_OF_DATE</calc_type>
+      <field_a>order_date_DateOrders</field_a>
+      <field_b/>
+      <field_c/>
+      <value_type>Integer</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask/>
+      <decimal_symbol/>
+      <grouping_symbol/>
+      <currency_symbol/>
+    </calculation>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Table input 2</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>hour_q</name>
+        <field>hour</field>
+      </key>
+      <key>
+        <name>minute_q</name>
+        <field>minute</field>
+      </key>
+      <key>
+        <name>month_day_q</name>
+        <field>month_day</field>
+      </key>
+      <key>
+        <name>month_q</name>
+        <field>month</field>
+      </key>
+      <key>
+        <name>week_day_q</name>
+        <field>week_day</field>
+      </key>
+      <key>
+        <name>year_q</name>
+        <field>year</field>
+      </key>
+      <key>
+        <name>quarter_q</name>
+        <field>quarter</field>
+      </key>
+      <value>
+        <name>time_id</name>
+        <rename>time_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>product_id</name>
+        <rename/>
+      </field>
+      <field>
+        <name>time_id</name>
+        <rename>order_time_id</rename>
+      </field>
+      <field>
+        <name>Order_Item_Discount</name>
+        <rename>discount</rename>
+      </field>
+      <field>
+        <name>Order_Item_Discount_Rate</name>
+        <rename>discount_rate</rename>
+      </field>
+      <field>
+        <name>price</name>
+        <rename>product_price</rename>
+      </field>
+      <field>
+        <name>Order_Item_Profit_Ratio</name>
+        <rename>profit_ratio</rename>
+      </field>
+      <field>
+        <name>Order_Item_Quantity</name>
+        <rename>quantity</rename>
+      </field>
+      <field>
+        <name>Sales</name>
+        <rename>sales</rename>
+      </field>
+      <field>
+        <name>Order_Item_Total</name>
+        <rename>order_item_total</rename>
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>512</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>table</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>order_item</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Switch / case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fieldname>result_table_check</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>String</case_value_type>
+    <case_value_format/>
+    <case_value_decimal/>
+    <case_value_group/>
+    <default_target_step>Execute SQL script</default_target_step>
+    <cases>
+      <case>
+        <value>Y</value>
+        <target_step>Select values 2 2</target_step>
+      </case>
+    </cases>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1278,21 +1970,22 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>SupplyChainRelational</connection>
+    <connection>Suply_order_item</connection>
     <execute_each_row>Y</execute_each_row>
     <single_statement>Y</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE IF NOT EXISTS dimensional_model.customer
+    <sql>CREATE TABLE IF NOT EXISTS dimensional_model.order_items
 (
-  customer_id BIGINT PRIMARY KEY
-, first_name VARCHAR(11)
-, last_name VARCHAR(12)
-, zipcode NUMERIC(8, 1)
-, latitude double precision
-, longitude double precision
-, segment_id BIGINT
-, segment VARCHAR(11)
+  product_id BIGINT
+, order_time_id BIGINT
+, discount double precision
+, discount_rate double precision
+, product_price double precision
+, profit_ratio double precision
+, quantity BIGINT
+, sales double precision
+, order_item_total double precision
 )
 ;</sql>
     <set_params>N</set_params>
@@ -1311,13 +2004,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
-      <yloc>288</yloc>
+      <xloc>912</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values (customer)</name>
+    <name>Select values 2 2</name>
     <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
@@ -1329,31 +2022,40 @@
     </partitioning>
     <fields>
       <field>
-        <name>Customer_Id</name>
+        <name>product_id</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Fname</name>
+        <name>order_time_id</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Lname</name>
+        <name>discount</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Country</name>
+        <name>discount_rate</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_City</name>
+        <name>product_price</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Zipcode</name>
+        <name>profit_ratio</name>
+        <rename/>
       </field>
       <field>
-        <name>Latitude</name>
+        <name>quantity</name>
+        <rename/>
       </field>
       <field>
-        <name>Longitude</name>
+        <name>sales</name>
+        <rename/>
       </field>
       <field>
-        <name>Customer_Segment</name>
+        <name>order_item_total</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1366,262 +2068,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values (customer_segment)</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Customer_Segment</name>
-        <rename>Segment</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Customer_Id</name>
-      </field>
-      <field>
-        <name>Customer_Fname</name>
-      </field>
-      <field>
-        <name>Customer_Lname</name>
-      </field>
-      <field>
-        <name>Customer_Country</name>
-      </field>
-      <field>
-        <name>Customer_City</name>
-      </field>
-      <field>
-        <name>Customer_Zipcode</name>
-      </field>
-      <field>
-        <name>Latitude</name>
-      </field>
-      <field>
-        <name>Longitude</name>
-      </field>
-      <field>
-        <name>Customer_segment_id</name>
-      </field>
-      <field>
-        <name>Customer_Segment</name>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1248</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>Y</unique_rows>
-    <fields>
-      <field>
-        <name>Segment</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>Customer_Id</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Stream lookup</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <from>Add sequence</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>Customer_Segment</name>
-        <field>Segment</field>
-      </key>
-      <value>
-        <name>seg_id</name>
-        <rename>Customer_segment_id</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Switch / case</name>
-    <type>SwitchCase</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fieldname>result_check_table</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>String</case_value_type>
-    <case_value_format/>
-    <case_value_decimal/>
-    <case_value_group/>
-    <default_target_step>Execute SQL script</default_target_step>
-    <cases>
-      <case>
-        <value>Y</value>
-        <target_step>Select values 2</target_step>
-      </case>
-    </cases>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>960</xloc>
-      <yloc>208</yloc>
+      <xloc>992</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1636,9 +2084,9 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>SupplyChainRelational</connection>
+    <connection>Suply_order_item</connection>
     <tablenamefield>table</tablenamefield>
-    <resultfieldname>result_check_table</resultfieldname>
+    <resultfieldname>result_table_check</resultfieldname>
     <schemaname>dimensional_model</schemaname>
     <attributes/>
     <cluster_schema/>
@@ -1649,8 +2097,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>848</xloc>
-      <yloc>208</yloc>
+      <xloc>736</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1665,9 +2113,9 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>SupplyChainRelational</connection>
+    <connection>Suply_order_item</connection>
     <schema>dimensional_model</schema>
-    <table>customer</table>
+    <table>order_items</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1684,36 +2132,40 @@
     <return_field/>
     <fields>
       <field>
-        <column_name>customer_id</column_name>
-        <stream_name>Customer_Id</stream_name>
+        <column_name>product_id</column_name>
+        <stream_name>product_id</stream_name>
       </field>
       <field>
-        <column_name>first_name</column_name>
-        <stream_name>Customer_Fname</stream_name>
+        <column_name>order_time_id</column_name>
+        <stream_name>order_time_id</stream_name>
       </field>
       <field>
-        <column_name>last_name</column_name>
-        <stream_name>Customer_Lname</stream_name>
+        <column_name>discount</column_name>
+        <stream_name>discount</stream_name>
       </field>
       <field>
-        <column_name>zipcode</column_name>
-        <stream_name>Customer_Zipcode</stream_name>
+        <column_name>discount_rate</column_name>
+        <stream_name>discount_rate</stream_name>
       </field>
       <field>
-        <column_name>latitude</column_name>
-        <stream_name>Latitude</stream_name>
+        <column_name>product_price</column_name>
+        <stream_name>product_price</stream_name>
       </field>
       <field>
-        <column_name>longitude</column_name>
-        <stream_name>Longitude</stream_name>
+        <column_name>profit_ratio</column_name>
+        <stream_name>profit_ratio</stream_name>
       </field>
       <field>
-        <column_name>segment_id</column_name>
-        <stream_name>Customer_segment_id</stream_name>
+        <column_name>quantity</column_name>
+        <stream_name>quantity</stream_name>
       </field>
       <field>
-        <column_name>segment</column_name>
-        <stream_name>Customer_Segment</stream_name>
+        <column_name>sales</column_name>
+        <stream_name>sales</stream_name>
+      </field>
+      <field>
+        <column_name>order_item_total</column_name>
+        <stream_name>order_item_total</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1725,94 +2177,12 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1408</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>Y</count_rows>
-    <count_field>Count</count_field>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Segment</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>48</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Unique rows 2</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <count_rows>N</count_rows>
-    <count_field/>
-    <reject_duplicate_row>N</reject_duplicate_row>
-    <error_description/>
-    <fields>
-      <field>
-        <name>Customer_Id</name>
-        <case_insensitive>Y</case_insensitive>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>432</xloc>
-      <yloc>208</yloc>
+      <xloc>1120</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step_error_handling>
-    <error>
-      <source_step>Table output</source_step>
-      <target_step>Execute SQL script</target_step>
-      <is_enabled>N</is_enabled>
-      <nr_valuename/>
-      <descriptions_valuename/>
-      <fields_valuename/>
-      <codes_valuename/>
-      <max_errors/>
-      <max_pct_errors/>
-      <min_pct_rows/>
-    </error>
   </step_error_handling>
   <slave-step-copy-partition-distribution>
   </slave-step-copy-partition-distribution>
