@@ -87,3 +87,13 @@ CREATE TABLE IF NOT EXISTS dimensional_model.order
 , total_price DOUBLE PRECISION
 )
 ;
+
+CREATE TABLE IF NOT EXISTS dimensional_model.agg_sales
+(
+  time_id BIGINT
+, location_id BIGINT
+, segment_id BIGINT
+, product_id BIGINT
+, sales DOUBLE PRECISION
+)
+;
