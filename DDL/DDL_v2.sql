@@ -28,15 +28,15 @@ CREATE TABLE IF NOT EXISTS dimensional_model.product
 CREATE TABLE IF NOT EXISTS dimensional_model.location
 (
   location_id BIGSERIAL PRIMARY KEY
-, city_id DOUBLE PRECISION
+, city_id BIGINT
 , city VARCHAR(35)
-, state_id DOUBLE PRECISION
+, state_id BIGINT
 , state VARCHAR(36)
-, country_id DOUBLE PRECISION
+, country_id BIGINT
 , country VARCHAR(25)
-, region_id DOUBLE PRECISION
+, region_id BIGINT
 , region VARCHAR(20)
-, market_id DOUBLE PRECISION
+, market_id BIGINT
 , market VARCHAR(12)
 )
 ;
