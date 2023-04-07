@@ -14,6 +14,6 @@
 
 1. Open trasformation for facts and aggregation tables in Pentaho (order_item, order, agg_sales)
 2. Configure source csv to local path in each transformation file
-3. Configure each 'Table Input' in each file for your local db connection
+3. Configure each 'Table Input' in each file for your local db connection where dimensions were created
 4. Configure 'Table Output' in each file for your local db connection
 5. Run to create tables and populate them
