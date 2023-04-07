@@ -4,7 +4,7 @@
 
 ### Create dimensions first
 
-1. Create schema in postgres
+1. Create schema inside a databbase in postgres
 2. Open transformations for dimensions tables (customer, time, location, product) in Pentaho PDI Kettle - 'Spoon' dir
 3. Configure source csv to local path in each transformation file
 4. Configure your local connection in 'Table Output' in each transformation file
