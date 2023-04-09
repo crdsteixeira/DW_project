@@ -498,7 +498,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input</from>
+      <from>Table input - Product</from>
       <to>Stream lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -508,7 +508,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Table input 2</from>
+      <from>Table input - Time</from>
       <to>Stream lookup 2</to>
       <enabled>Y</enabled>
     </hop>
@@ -592,7 +592,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>848</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -723,7 +723,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>464</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1397,7 +1397,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>1392</xloc>
       <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1457,7 +1457,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
+      <xloc>288</xloc>
       <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1520,7 +1520,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>512</xloc>
+      <xloc>656</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1575,7 +1575,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>1584</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1591,7 +1591,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Table input</from>
+    <from>Table input - Product</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1623,7 +1623,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
+      <xloc>288</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1639,7 +1639,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <from>Table input 2</from>
+    <from>Table input - Time</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -1689,7 +1689,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
+      <xloc>464</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1727,7 +1727,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
+      <xloc>1200</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1756,13 +1756,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
+      <xloc>1024</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table input</name>
+    <name>Table input - Product</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1843,7 +1843,7 @@
     </GUI>
   </step>
   <step>
-    <name>Table input 2</name>
+    <name>Table input - Time</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2159,7 +2159,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>1760</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
