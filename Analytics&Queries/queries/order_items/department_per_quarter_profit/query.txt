@@ -1,0 +1,11 @@
+SELECT
+	COALESCE(CAST(t.quarter AS VARCHAR), 'All quarters') AS quarter, 
+	COALESCE(p.department_name, 'All departments') AS department, 
+	SUM(profit_ratio*order_item_total) AS department_profit
+FROM 
+	order_items o JOIN product p USING(product_id)
+	JOIN time t ON t.time_id=o.order_time_id
+GROUP BY 
+	CUBE(quarter, p.department_name)
+ORDER BY 
+	department_profit DESC

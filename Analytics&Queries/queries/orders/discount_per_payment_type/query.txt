@@ -1,0 +1,4 @@
+SELECT COALESCE(orders.payment_type, 'All payment types') AS payment_type, AVG(orders.total_discount) AS avg_discount_per_order
+FROM orders
+GROUP BY CUBE(orders.payment_type)
+ORDER BY avg_discount_per_order DESC

@@ -1,0 +1,199 @@
+"country","payment_type","number_of_occurrences"
+"All countries","All payment_types",8898
+"Alemania","All payment_types",1609
+"Reino Unido","All payment_types",1415
+"Francia","All payment_types",1311
+"Australia","All payment_types",865
+"Italia","All payment_types",652
+"Alemania","DEBIT",641
+"China","All payment_types",614
+"Reino Unido","DEBIT",519
+"Francia","DEBIT",510
+"Indonesia","All payment_types",456
+"Alemania","TRANSFER",444
+"India","All payment_types",443
+"Reino Unido","TRANSFER",399
+"Alemania","PAYMENT",372
+"Francia","TRANSFER",349
+"Australia","DEBIT",348
+"Reino Unido","PAYMENT",333
+"Francia","PAYMENT",304
+"Filipinas","All payment_types",246
+"Italia","DEBIT",241
+"Australia","TRANSFER",234
+"Austria","All payment_types",234
+"China","DEBIT",228
+"Italia","TRANSFER",187
+"Australia","PAYMENT",182
+"Indonesia","DEBIT",182
+"Reino Unido","CASH",164
+"China","TRANSFER",163
+"India","DEBIT",161
+"Suecia","All payment_types",159
+"Italia","PAYMENT",158
+"China","PAYMENT",156
+"Alemania","CASH",152
+"Francia","CASH",148
+"Indonesia","TRANSFER",146
+"India","TRANSFER",132
+"Australia","CASH",101
+"Tailandia","All payment_types",100
+"Austria","DEBIT",93
+"Brasil","All payment_types",90
+"Filipinas","DEBIT",90
+"India","PAYMENT",87
+"Indonesia","PAYMENT",87
+"Singapur","All payment_types",74
+"Suecia","DEBIT",72
+"China","CASH",67
+"Italia","CASH",66
+"Austria","TRANSFER",65
+"India","CASH",63
+"Filipinas","PAYMENT",63
+"Filipinas","TRANSFER",62
+"Portugal","All payment_types",61
+"Noruega","All payment_types",57
+"Finlandia","All payment_types",54
+"Austria","PAYMENT",53
+"Vietnam","All payment_types",51
+"Suecia","TRANSFER",45
+"Corea del Sur","All payment_types",42
+"Indonesia","CASH",41
+"Malasia","All payment_types",40
+"Brasil","DEBIT",40
+"Tailandia","TRANSFER",39
+"Nicaragua","All payment_types",37
+"Guatemala","All payment_types",37
+"Suiza","All payment_types",37
+"El Salvador","All payment_types",35
+"Filipinas","CASH",31
+"Tailandia","DEBIT",31
+"Suecia","PAYMENT",27
+"Dinamarca","All payment_types",26
+"Cuba","All payment_types",25
+"Finlandia","DEBIT",24
+"Portugal","DEBIT",24
+"Singapur","DEBIT",23
+"Austria","CASH",23
+"Vietnam","DEBIT",22
+"Noruega","TRANSFER",22
+"Singapur","TRANSFER",21
+"Finlandia","TRANSFER",21
+"Singapur","PAYMENT",21
+"Brasil","PAYMENT",21
+"Tailandia","PAYMENT",20
+"Irlanda","All payment_types",20
+"Brasil","TRANSFER",19
+"Suiza","DEBIT",18
+"Corea del Sur","DEBIT",17
+"Malasia","DEBIT",17
+"Argentina","All payment_types",16
+"Portugal","PAYMENT",16
+"Suecia","CASH",15
+"Guatemala","TRANSFER",14
+"Portugal","TRANSFER",14
+"Guatemala","DEBIT",13
+"Noruega","DEBIT",13
+"Noruega","PAYMENT",13
+"Malasia","PAYMENT",12
+"Corea del Sur","TRANSFER",12
+"Nicaragua","DEBIT",12
+"Nepal","All payment_types",12
+"El Salvador","TRANSFER",11
+"Chile","All payment_types",11
+"Venezuela","All payment_types",11
+"Vietnam","CASH",11
+"Corea del Sur","PAYMENT",10
+"Vietnam","PAYMENT",10
+"Colombia","All payment_types",10
+"Nicaragua","PAYMENT",10
+"El Salvador","PAYMENT",10
+"Nicaragua","TRANSFER",10
+"Tailandia","CASH",10
+"Suiza","PAYMENT",10
+"El Salvador","DEBIT",10
+"Brasil","CASH",10
+"Dinamarca","TRANSFER",9
+"Singapur","CASH",9
+"Irlanda","TRANSFER",9
+"Hong Kong","All payment_types",9
+"Dinamarca","PAYMENT",9
+"Noruega","CASH",9
+"Cuba","DEBIT",8
+"Argentina","DEBIT",8
+"Cuba","TRANSFER",8
+"Camboya","All payment_types",8
+"Vietnam","TRANSFER",8
+"Irlanda","DEBIT",7
+"Guatemala","PAYMENT",7
+"Suiza","TRANSFER",7
+"Chile","DEBIT",7
+"Portugal","CASH",7
+"Finlandia","PAYMENT",7
+"Bolivia","All payment_types",6
+"Grecia","All payment_types",6
+"Malasia","TRANSFER",6
+"Malasia","CASH",5
+"Venezuela","DEBIT",5
+"Nicaragua","CASH",5
+"Cuba","PAYMENT",5
+"Argentina","TRANSFER",5
+"Dinamarca","DEBIT",5
+"El Salvador","CASH",4
+"Bolivia","TRANSFER",4
+"Trinidad y Tobago","All payment_types",4
+"Colombia","DEBIT",4
+"Nepal","DEBIT",4
+"Cuba","CASH",4
+"Nepal","PAYMENT",4
+"Sri Lanka","All payment_types",4
+"Irlanda","PAYMENT",3
+"Guatemala","CASH",3
+"Hong Kong","PAYMENT",3
+"Venezuela","CASH",3
+"Dinamarca","CASH",3
+"Hong Kong","DEBIT",3
+"Corea del Sur","CASH",3
+"Venezuela","PAYMENT",3
+"Chile","PAYMENT",3
+"Camboya","PAYMENT",3
+"Colombia","PAYMENT",3
+"Trinidad y Tobago","TRANSFER",3
+"Jamaica","All payment_types",3
+"Honduras","All payment_types",3
+"Camboya","DEBIT",3
+"Nepal","TRANSFER",2
+"Camboya","TRANSFER",2
+"Colombia","TRANSFER",2
+"Grecia","TRANSFER",2
+"Suiza","CASH",2
+"Hong Kong","TRANSFER",2
+"Grecia","DEBIT",2
+"Nepal","CASH",2
+"Finlandia","CASH",2
+"Jamaica","TRANSFER",2
+"Argentina","PAYMENT",2
+"Honduras","DEBIT",2
+"Chipre","All payment_types",2
+"Sri Lanka","TRANSFER",2
+"Luxemburgo","All payment_types",2
+"Chipre","DEBIT",1
+"Bolivia","CASH",1
+"Argentina","CASH",1
+"Sri Lanka","DEBIT",1
+"Ecuador","All payment_types",1
+"Grecia","CASH",1
+"Jamaica","PAYMENT",1
+"Irlanda","CASH",1
+"Luxemburgo","PAYMENT",1
+"Trinidad y Tobago","PAYMENT",1
+"Hong Kong","CASH",1
+"Sri Lanka","CASH",1
+"Grecia","PAYMENT",1
+"Honduras","CASH",1
+"Colombia","CASH",1
+"Chile","CASH",1
+"Bolivia","DEBIT",1
+"Chipre","PAYMENT",1
+"Ecuador","PAYMENT",1
+"Luxemburgo","DEBIT",1
