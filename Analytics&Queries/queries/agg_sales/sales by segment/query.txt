@@ -1,0 +1,4 @@
+select a.segment_id, sum(total_sales) sales                                                                                                                                                                                                                                         
+from dimensional_model.agg_sales a
+group by a.segment_id
+order by sales DESC

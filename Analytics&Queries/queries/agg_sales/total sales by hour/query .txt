@@ -1,0 +1,5 @@
+select t.hour_id, t.hour, sum(total_sales) sales                                                                                                                                                                                                                                         
+from dimensional_model.agg_sales a, dimensional_model.time t
+where a.time_id = t.time_id 
+group by t.hour_id, t.hour
+order by t.hour_id ASC

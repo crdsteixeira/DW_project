@@ -1,0 +1,4 @@
+select t.quarter, a.segment_id, a.product_id, p.name,  sum(total_sales) sales                                                                                                                                                                                                                                         
+from dimensional_model.agg_sales a natural join dimensional_model.time t natural join dimensional_model.product p
+group by a.product_id, p.name, a.segment_id, t.quarter
+order by t.quarter, sales DESC
