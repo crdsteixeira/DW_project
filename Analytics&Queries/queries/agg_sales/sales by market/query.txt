@@ -1,0 +1,4 @@
+select l.market_id, l.market,  sum(total_sales) sales                                                                                                                                                                                                                                         
+from dimensional_model.agg_sales a natural join dimensional_model.location l
+group by l.market_id, l.market
+order by sales DESC
