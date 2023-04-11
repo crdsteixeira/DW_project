@@ -1,0 +1,13 @@
+SELECT a.product_id, p.name, SUM(a.total_sales) AS total_sales
+FROM dimensional_model.agg_sales a
+NATURAL JOIN dimensional_model.product p
+GROUP BY a.product_id, p.name
+HAVING SUM(a.total_sales) >= (
+    SELECT MAX(total_sales_sum)
+    FROM (
+        SELECT SUM(total_sales) AS total_sales_sum
+        FROM dimensional_model.agg_sales
+        GROUP BY product_id
+    ) t1
+)
+ORDER BY total_sales DESC;
