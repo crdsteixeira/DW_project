@@ -94,6 +94,6 @@ CREATE TABLE IF NOT EXISTS dimensional_model.agg_sales
 , location_id BIGINT REFERENCES dimensional_model.location (location_id) ON DELETE SET NULL ON UPDATE CASCADE
 , product_id BIGINT REFERENCES dimensional_model.product (product_id) ON DELETE SET NULL ON UPDATE CASCADE
 , segment_id BIGINT
-, sales DOUBLE PRECISION
+, total_sales DOUBLE PRECISION
 )
 ;

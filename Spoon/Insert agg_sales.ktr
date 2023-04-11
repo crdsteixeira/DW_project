@@ -543,11 +543,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 2</from>
-      <to>Add constants</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Add constants</from>
       <to>Table exists</to>
       <enabled>Y</enabled>
@@ -575,6 +570,21 @@
     <hop>
       <from>Select values 3</from>
       <to>Table output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 2</from>
+      <to>Sort rows 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Sort rows 2</from>
+      <to>Group by</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Group by</from>
+      <to>Add constants</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -612,7 +622,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
+      <xloc>1024</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1368,7 +1378,7 @@
 , location_id BIGINT REFERENCES dimensional_model.location (location_id) ON DELETE SET NULL ON UPDATE CASCADE
 , product_id BIGINT REFERENCES dimensional_model.product (product_id) ON DELETE SET NULL ON UPDATE CASCADE
 , segment_id BIGINT
-, sales DOUBLE PRECISION
+, total_sales DOUBLE PRECISION
 )
 ;</sql>
     <set_params>N</set_params>
@@ -1387,7 +1397,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1296</xloc>
+      <xloc>1520</xloc>
       <yloc>512</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1489,7 +1499,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>592</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1508,18 +1518,23 @@
     <fields>
       <field>
         <name>time_id</name>
+        <rename/>
       </field>
       <field>
         <name>location_id</name>
+        <rename/>
       </field>
       <field>
         <name>product_id</name>
+        <rename/>
       </field>
       <field>
         <name>segment_id</name>
+        <rename/>
       </field>
       <field>
-        <name>sales</name>
+        <name>total_sales</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
@@ -1532,7 +1547,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1456</xloc>
+      <xloc>1680</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1766,7 +1781,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
+      <xloc>1360</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1795,7 +1810,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>960</xloc>
+      <xloc>1184</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
@@ -2346,16 +2361,16 @@
         <stream_name>location_id</stream_name>
       </field>
       <field>
-        <column_name>segment_id</column_name>
-        <stream_name>segment_id</stream_name>
-      </field>
-      <field>
         <column_name>product_id</column_name>
         <stream_name>product_id</stream_name>
       </field>
       <field>
-        <column_name>sales</column_name>
-        <stream_name>sales</stream_name>
+        <column_name>segment_id</column_name>
+        <stream_name>segment_id</stream_name>
+      </field>
+      <field>
+        <column_name>total_sales</column_name>
+        <stream_name>total_sales</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -2367,7 +2382,128 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1616</xloc>
+      <xloc>1840</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>time_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>location_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>product_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>segment_id</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <all_rows>N</all_rows>
+    <ignore_aggregate>N</ignore_aggregate>
+    <field_ignore/>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>grp</prefix>
+    <add_linenr>N</add_linenr>
+    <linenr_fieldname/>
+    <give_back_row>N</give_back_row>
+    <group>
+      <field>
+        <name>time_id</name>
+      </field>
+      <field>
+        <name>product_id</name>
+      </field>
+      <field>
+        <name>location_id</name>
+      </field>
+      <field>
+        <name>segment_id</name>
+      </field>
+    </group>
+    <fields>
+      <field>
+        <aggregate>total_sales</aggregate>
+        <subject>sales</subject>
+        <type>SUM</type>
+        <valuefield/>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>848</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
