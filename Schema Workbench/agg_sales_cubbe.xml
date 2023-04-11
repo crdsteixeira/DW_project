@@ -1,0 +1,56 @@
+<Schema name="agg_sales_cubbe">
+  <Dimension type="StandardDimension" visible="true" foreignKey="time_id" name="time_dim">
+    <Hierarchy name="tempo_hierar" visible="true" hasAll="true">
+      <Table name="time" schema="dimensional_model" alias="">
+      </Table>
+      <Level name="year" visible="true" table="time" column="year" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="quarter" visible="true" table="time" column="quarter" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="month" visible="true" table="time" column="month" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="week_day" visible="true" table="time" column="week_day" nameColumn="week_day" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" foreignKey="product_id" name="product_dim">
+    <Hierarchy name="product_hierar" visible="true" hasAll="true">
+      <Table name="product" schema="dimensional_model" alias="">
+      </Table>
+      <Level name="product" visible="true" table="product" column="product_id" type="Integer" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="department" visible="true" table="product" column="department_id" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="category" visible="true" table="product" column="category_id" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" foreignKey="location_id" name="location">
+    <Hierarchy name="location_hierar" visible="true" hasAll="true">
+      <Table name="location" schema="dimensional_model" alias="">
+      </Table>
+      <Level name="city" visible="true" table="location" column="city_id" uniqueMembers="false">
+      </Level>
+      <Level name="state" visible="true" table="location" column="state_id" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="country" visible="true" table="location" column="country_id" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="region" visible="true" table="location" column="region_id" type="Integer" internalType="int" uniqueMembers="false" levelType="Regular">
+      </Level>
+      <Level name="market" visible="true" table="location" column="market_id" internalType="int" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="agg_sales_cube" visible="true" cache="true" enabled="true">
+    <Table name="agg_sales" schema="dimensional_model">
+    </Table>
+    <DimensionUsage source="time_dim" name="time" visible="true" foreignKey="time_id">
+    </DimensionUsage>
+    <DimensionUsage source="product_dim" name="product" visible="true" foreignKey="product_id">
+    </DimensionUsage>
+    <DimensionUsage source="location" name="location" visible="true" foreignKey="location_id">
+    </DimensionUsage>
+    <Measure name="sales" column="total_sales" datatype="Numeric" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
