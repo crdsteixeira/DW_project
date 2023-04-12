@@ -1,4 +1,14 @@
-<Schema name="agg_sales_cubbe">
+<Schema name="agg_sales_cube">
+  <DataSources>
+    <DataSource>
+      <Connection>
+        <Driver>com.mysql.jdbc.Driver</Driver>
+        <Url>jdbc:mysql://localhost:5432/SupplyChainRelational</Url>
+        <User>cteixeira</User>
+        <Password>14#remember</Password>
+      </Connection>
+    </DataSource>
+  </DataSources>
   <Dimension type="StandardDimension" visible="true" foreignKey="time_id" name="time_dim">
     <Hierarchy name="tempo_hierar" visible="true" hasAll="true">
       <Table name="time" schema="dimensional_model" alias="">
