@@ -1,4 +1,4 @@
-# Data Warehouses Project
+# Data Warehouses Project (Group 5)
 
 ## Run ETL Instructions 
 
@@ -17,3 +17,10 @@
 3. Configure each 'Table Input' in each file for your local db connection where dimensions were created
 4. Configure 'Table Output' in each file for your local db connection
 5. Run to create tables and populate them
+
+## Run Power BI
+
+### Connect to local database
+
+1. Go to 'Get Data'
+2. Configure your local database created in previous steps for connection
