@@ -1,4 +1,4 @@
-select t.quarter, l.market_id, l.region, sum(total_sales) sales                                                                                                                                                                                                                                         
+select t.quarter, l.market_id, l.region, round(sum(total_sales)::numeric, 2) sales                                                                                                                                                                                                                                         
 from dimensional_model.agg_sales a natural join dimensional_model.location l natural join dimensional_model.time t
 group by t.quarter, l.market_id, l.region
 order by t.quarter ASC, sales DESC

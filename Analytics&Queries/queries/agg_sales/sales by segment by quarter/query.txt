@@ -1,4 +1,4 @@
-select t.quarter, a.segment_id, sum(total_sales) sales                                                                                                                                                                                                                                         
+select t.quarter, a.segment_id, round(sum(total_sales)::numeric, 2) sales                                                                                                                                                                                                                                         
 from dimensional_model.agg_sales a natural join dimensional_model.time t
 group by a.segment_id, t.quarter
 order by t.quarter, sales DESC

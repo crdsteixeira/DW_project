@@ -1,5 +1,5 @@
-select t.month, sum(total_sales) sales                                                                                                                                                                                                                                         
+select t.month, round(sum(total_sales)::numeric, 2) sales                                                                                                                                                                                                                                         
 from dimensional_model.agg_sales a, dimensional_model.time t
 where a.time_id = t.time_id 
 group by t.month
-order by t.month ASC
+order by sales desc

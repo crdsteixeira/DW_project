@@ -1,4 +1,4 @@
-select l.market_id, l.market,  sum(total_sales) sales                                                                                                                                                                                                                                         
+select l.market_id, l.market,  ROUND( sum(total_sales)::numeric, 2 ) as sales                                                                                                                                                                                                                                         
 from dimensional_model.agg_sales a natural join dimensional_model.location l
 group by l.market_id, l.market
 order by sales DESC

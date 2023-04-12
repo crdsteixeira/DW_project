@@ -1,4 +1,4 @@
-"market_id","market","sales"
-1,"Europe",5083655.152140194
-3,"Pacific Asia",917859.7157400234
-2,"LATAM",581534.4231999977
+"segment_id","segment","sales"
+1,"Consumer",20447518557.09
+2,"Corporate",6994677990.34
+3,"Home Office",2351210792.22

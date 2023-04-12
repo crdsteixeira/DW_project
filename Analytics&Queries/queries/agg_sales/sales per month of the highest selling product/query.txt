@@ -1,4 +1,3 @@
-SELECT t.month, a.product_id, p.name, SUM(a.total_sales) AS sales
 FROM dimensional_model.agg_sales a
 natural JOIN dimensional_model.product p natural JOIN dimensional_model.time t 
 WHERE a.product_id IN 
@@ -15,4 +14,4 @@ HAVING SUM(a.total_sales) >= (
     ) t1
 )) 
 GROUP BY t.month, a.product_id, p.name
-ORDER BY t.month, sales DESC;
+ORDER BY sales DESC;
