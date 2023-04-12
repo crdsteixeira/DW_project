@@ -1,5 +1,0 @@
-SELECT product.category_name, (SUM(order_items.sales) - SUM(order_items.order_item_total))/SUM(order_items.sales) AS profit_margin
-FROM order_items
-JOIN product ON order_items.product_id = product.product_id
-GROUP BY product.category_name
-ORDER BY profit_margin DESC;

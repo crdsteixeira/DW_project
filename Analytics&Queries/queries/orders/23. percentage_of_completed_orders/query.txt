@@ -1,0 +1,14 @@
+SELECT 
+    COALESCE(l.market, 'All markets') AS market, 
+    COALESCE(l.region, 'All regions') AS region, 
+    COALESCE(l.country, 'All countries') AS country, 
+    COUNT(o.order_status) AS total_orders,
+    SUM(CASE WHEN o.order_status = 'COMPLETE' THEN 1 ELSE 0 END) AS completed_orders,
+    (SUM(CASE WHEN o.order_status = 'COMPLETE' THEN 1 ELSE 0 END) * 100.0 / COUNT(o.order_status)) AS percentage_completed_orders
+
+FROM 
+	orders o JOIN location l ON o.order_location_id = l.location_id 
+GROUP BY 
+	ROLLUP(l.market, l.region, l.country)
+ORDER BY 
+	completed_orders DESC, percentage_completed_orders DESC

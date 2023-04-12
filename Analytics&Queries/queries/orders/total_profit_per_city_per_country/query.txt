@@ -1,4 +1,0 @@
-SELECT COALESCE(l.country, 'All countries') AS country, COALESCE(l.city, 'All cities') AS city, SUM(profit_per_order) AS total_profit
-FROM orders o JOIN location l ON o.order_location_id=l.location_id
-GROUP BY ROLLUP(l.country, l.city)
-ORDER BY total_profit DESC

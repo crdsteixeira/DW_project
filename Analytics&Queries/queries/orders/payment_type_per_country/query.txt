@@ -1,7 +1,0 @@
-SELECT COALESCE(l.country, 'All countries') as country, 
-COALESCE(o.payment_type, 'All payment_types') as payment_type,
-COUNT(*) AS number_of_occurrences 
-FROM orders o 
-JOIN location l ON o.order_location_id = l.location_id 
-GROUP BY ROLLUP(l.country, o.payment_type) 
-ORDER BY number_of_occurrences DESC

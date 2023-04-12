@@ -1,0 +1,58 @@
+"market","region","country","total_orders","completed_orders","percentage_completed_orders"
+"All markets","All regions","All countries",8898,2953,33.1872330860867611
+"Europe","All regions","All countries",5645,1887,33.4278122232063773
+"Europe","Western Europe","All countries",3193,1101,34.4816786720952083
+"Pacific Asia","All regions","All countries",2964,975,32.8947368421052632
+"Europe","Northern Europe","All countries",1731,564,32.5823223570190641
+"Europe","Western Europe","Alemania",1609,554,34.4313238036047234
+"Europe","Northern Europe","Reino Unido",1415,460,32.5088339222614841
+"Europe","Western Europe","Francia",1311,452,34.4774980930587338
+"Pacific Asia","Southeast Asia","All countries",975,307,31.4871794871794872
+"Pacific Asia","Oceania","All countries",865,302,34.9132947976878613
+"Pacific Asia","Oceania","Australia",865,302,34.9132947976878613
+"Pacific Asia","Eastern Asia","All countries",665,223,33.5338345864661654
+"Europe","Southern Europe","All countries",721,222,30.7905686546463245
+"Pacific Asia","Eastern Asia","China",614,203,33.0618892508143322
+"Europe","Southern Europe","Italia",652,200,30.6748466257668712
+"Pacific Asia","Southeast Asia","Indonesia",456,152,33.3333333333333333
+"Pacific Asia","South Asia","All countries",459,143,31.1546840958605664
+"Pacific Asia","South Asia","India",443,139,31.3769751693002257
+"LATAM","All regions","All countries",289,91,31.4878892733564014
+"Europe","Western Europe","Austria",234,78,33.3333333333333333
+"Pacific Asia","Southeast Asia","Filipinas",246,74,30.0813008130081301
+"Europe","Northern Europe","Suecia",159,63,39.6226415094339623
+"LATAM","South America","All countries",145,57,39.3103448275862069
+"LATAM","South America","Brasil",90,37,41.1111111111111111
+"Pacific Asia","Southeast Asia","Tailandia",100,29,29.0000000000000000
+"LATAM","Central America","All countries",112,29,25.8928571428571429
+"Europe","Northern Europe","Finlandia",54,22,40.7407407407407407
+"Europe","Southern Europe","Portugal",61,21,34.4262295081967213
+"Pacific Asia","Southeast Asia","Singapur",74,20,27.0270270270270270
+"Pacific Asia","Eastern Asia","Corea del Sur",42,17,40.4761904761904762
+"Europe","Western Europe","Suiza",37,16,43.2432432432432432
+"Pacific Asia","Southeast Asia","Vietnam",51,16,31.3725490196078431
+"Pacific Asia","Southeast Asia","Malasia",40,14,35.0000000000000000
+"Europe","Northern Europe","Noruega",57,11,19.2982456140350877
+"LATAM","Central America","Nicaragua",37,10,27.0270270270270270
+"LATAM","Central America","Guatemala",37,9,24.3243243243243243
+"LATAM","Central America","El Salvador",35,8,22.8571428571428571
+"LATAM","South America","Argentina",16,7,43.7500000000000000
+"LATAM","South America","Venezuela",11,5,45.4545454545454545
+"Europe","Northern Europe","Irlanda",20,5,25.0000000000000000
+"LATAM","Caribbean","Cuba",25,5,20.0000000000000000
+"LATAM","Caribbean","All countries",32,5,15.6250000000000000
+"LATAM","South America","Chile",11,4,36.3636363636363636
+"Pacific Asia","South Asia","Nepal",12,4,33.3333333333333333
+"Pacific Asia","Eastern Asia","Hong Kong",9,3,33.3333333333333333
+"LATAM","South America","Colombia",10,3,30.0000000000000000
+"Europe","Northern Europe","Dinamarca",26,3,11.5384615384615385
+"LATAM","Central America","Honduras",3,2,66.6666666666666667
+"Pacific Asia","Southeast Asia","Camboya",8,2,25.0000000000000000
+"Europe","Southern Europe","Chipre",2,1,50.0000000000000000
+"Europe","Western Europe","Luxemburgo",2,1,50.0000000000000000
+"LATAM","South America","Bolivia",6,1,16.6666666666666667
+"Pacific Asia","South Asia","Sri Lanka",4,0,0E-20
+"LATAM","South America","Ecuador",1,0,0E-20
+"Europe","Southern Europe","Grecia",6,0,0E-20
+"LATAM","Caribbean","Jamaica",3,0,0E-20
+"LATAM","Caribbean","Trinidad y Tobago",4,0,0E-20

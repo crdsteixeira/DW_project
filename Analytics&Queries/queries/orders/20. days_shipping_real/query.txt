@@ -1,0 +1,5 @@
+SELECT COALESCE(l.country, 'All countries') as country, AVG(o.days_for_shipping_real) AS average_shipping_days 
+FROM orders o 
+JOIN location l ON o.order_location_id = l.location_id 
+GROUP BY CUBE(l.country) 
+ORDER BY average_shipping_days DESC
