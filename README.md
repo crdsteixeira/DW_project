@@ -2,13 +2,10 @@
 
 ## Setup
 
-The Data Warehouse was implemented using PostgreSQL.
-  
-The ETL was developed using Pentaho PDI.  
-
-The mondrian schema was done using Penatho Shema Workbench.  
-
-The dashboards required the use of Microsoft Power BI.
+(-) The Data Warehouse was implemented using PostgreSQL.
+(-) The ETL was developed using Pentaho PDI.  
+(-) The mondrian schema was done using Penatho Shema Workbench.  
+(-) The dashboards required the use of Microsoft Power BI.
 
 ## Run ETL Instructions 
 
