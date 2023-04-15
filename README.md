@@ -1,4 +1,13 @@
-# Data Warehouses Project
+# Data Warehouse Project
+
+Masters in Data Science and Engineering  
+Faculdade de Engenharia da Universidade do Porto
+
+[Cátia Teixeira](https://github.com/crdsteixeira) | [Rojan Aslani](https://github.com/RojanAsl) | [Miguel Veloso](https://github.com/cmiguelsv) | [Luís Henriques](https://github.com/LuisPHenriques)
+
+Data warehouses are centralized data repositories that integrate data from various systems, applications and sources.  
+Supply chain encomapasses all of the facilities, functions, and activities involved in producing a product or service from suppliers to customers.  
+In this work, light is shed on the importance of data warehousing solutions for supply chain management.
 
 ## Setup
 
